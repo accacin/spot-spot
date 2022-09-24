@@ -1,6 +1,6 @@
+import Link from "next/link";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Button } from "../components";
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +18,12 @@ const Home: NextPage = () => {
           <p className="text-gray-700 text-2xl w-2/3 text-center mb-10">
             Found an interesting location when discovering a new city?{" "}
           </p>
-          <Button text="Plot for Free" />
+          {/* This could be a component */}
+          <Link href="/map/create">
+            <a className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Plot for Free
+            </a>
+          </Link>
         </div>
       </section>
     </>
