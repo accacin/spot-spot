@@ -1,6 +1,6 @@
 // import Link from "next/link";
 import LocationIcon from "../../public/location-icon.svg";
-import { Container } from "../../components";
+import { Container, LoginButton } from "../../components";
 
 const Nav = () => {
   return (
@@ -12,7 +12,7 @@ const Nav = () => {
             <LocationIcon className="w-5 text-gray-900 fill-current" />
             <span className="pl-1">Spot</span>
           </div>
-          <span>Register Interest</span>
+          <LoginButton />
         </div>
       </Container>
     </nav>
