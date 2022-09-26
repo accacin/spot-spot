@@ -1,4 +1,4 @@
-import { Nav, Container } from "../index";
+import { Nav, Container } from "../../../components/Layout";
 
 interface Props {
   children?: React.ReactNode;
@@ -8,9 +8,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div>
       <Nav />
-      <Container>
-        {children}
-      </Container>
+      <Container>{children}</Container>
     </div>
   );
 };

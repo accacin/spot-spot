@@ -1,6 +1,7 @@
 // import Link from "next/link";
-import LocationIcon from "../../public/location-icon.svg";
-import { Container, LoginButton } from "../../components";
+import LocationIcon from "../../../public/location-icon.svg";
+import { Container } from "../../../components/Layout";
+import { LoginButton } from "../../../components/Common";
 
 const Nav = () => {
   return (
