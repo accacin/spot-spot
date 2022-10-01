@@ -1,22 +1,15 @@
-import { useSession, signIn, signOut } from "next-auth/react";
-import Button from '../Button/Button';
+import { useSession, signIn } from "next-auth/react";
+import { Button, ProfilePicture } from "../../../components/Common";
 
-function LoginButton () {
+function LoginButton() {
   const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session?.user?.email} <br />
-        <Button onClick={() => signOut()}>Sign out</Button>
-      </>
-    );
+  if (session?.user?.image) {
+    return <ProfilePicture url={session.user.image}  />;
   }
   return (
     <>
       {" "}
-      <Button onClick={() => signIn()}>
-        Sign in
-      </Button>{" "}
+      <Button onClick={() => signIn()}>Sign in</Button>{" "}
     </>
   );
 }

@@ -12,8 +12,8 @@ const Nav = () => {
             <span className="pr-1 text-green-700">Spot</span>
             <LocationIcon className="w-5 text-gray-900 fill-current" />
             <span className="pl-1">Spot</span>
+            <LoginButton />
           </div>
-          <LoginButton />
         </div>
       </Container>
     </nav>
