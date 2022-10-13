@@ -1,4 +1,4 @@
-import { Nav, Container } from "../../../components/Layout";
+import { Nav, Container } from "../../../components/layout";
 
 interface Props {
   children?: React.ReactNode;
