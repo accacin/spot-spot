@@ -10,9 +10,9 @@ const Home: NextPage = () => {
         <meta name="description" content="Interesting Locations for Friends" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="pt-20">
+      <section className="pt-20 w-full">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-gray-800 text-8xl w-2/3 text-center mb-4">
+          <h1 className="text-gray-800 text-8xl w-1/2 max-w-3xl text-center mb-4">
             Plot Locations with Friends
           </h1>
           <p className="text-gray-700 text-2xl w-2/3 text-center mb-10">

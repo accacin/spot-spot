@@ -6,7 +6,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div>
+    <div className="w-screen h-screen flex flex-col">
       <Nav />
       <Container>{children}</Container>
     </div>

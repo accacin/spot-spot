@@ -21,7 +21,7 @@ const CreateMap: NextPage = () => {
           integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
         />
       </Head>
-      <section className="pt-20">
+      <section className="flex w-full flex-col flex-grow-1 justify-center items-center">
         <Script
           src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
           integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
