@@ -1,6 +1,6 @@
 import Link from "next/link";
 import LocationIcon from "../../../public/location-icon.svg";
-import { Dropdown } from "../../../components/common";
+import { LoginButton } from "../../../components/common";
 
 const Nav = () => {
   return (
@@ -14,7 +14,7 @@ const Nav = () => {
           </div>
         </Link>
         <div className="flex text-lg select-none">
-          <Dropdown />
+          <LoginButton />
         </div>
       </div>
     </nav>
