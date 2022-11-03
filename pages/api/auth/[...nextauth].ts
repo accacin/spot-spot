@@ -1,4 +1,5 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
@@ -11,7 +12,7 @@ if (DISCORD_CLIENT_SECRET === "" || DISCORD_CLIENT_ID === "") {
   throw Error("Missing Discord credentials");
 }
 
-export default NextAuth({
+export const authOptions: NextAuthOptions  = {
   adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
@@ -27,5 +28,12 @@ export default NextAuth({
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
+    async session({ session, user }) {
+      session.user.id = user.id;
+
+      return session;
+    }
   },
-});
+}
+
+export default NextAuth(authOptions);

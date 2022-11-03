@@ -3,18 +3,21 @@ import type { NextPage } from "next";
 
 const Lists: NextPage = () => {
   const handleSubmit = async (event: any) => {
-    console.log(event);
+    event.preventDefault();
     const formData = new FormData(event.target);
     const dataObject = Object.fromEntries(formData);
 
-    console.log(dataObject);
+    await fetch("/api/lists/create", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(dataObject),
+    });
 
-    // await fetch("/api/form", {
-    //   method: "POST",
-    //   body: JSON.stringify(dataObject),
-    // });
     event.target.reset();
   };
+
   return (
     <>
       <Head>
@@ -32,15 +35,15 @@ const Lists: NextPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label
-                htmlFor="email"
+                htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Name
               </label>
               <input
-                type="listname"
-                id="listname"
-                name="listname"
+                type="name"
+                id="name"
+                name="name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="My Favourite Restaurants"
                 required
@@ -48,14 +51,14 @@ const Lists: NextPage = () => {
             </div>
             <div className="mb-6">
               <label
-                htmlFor="message"
+                htmlFor="desc"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
               >
                 Description
               </label>
               <textarea
-                id="description"
-                name="description"
+                id="desc"
+                name="desc"
                 rows={4}
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Leave a comment..."
