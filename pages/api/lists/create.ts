@@ -18,7 +18,6 @@ export default async function handler(
 
   if (req.method === "POST") {
     try {
-      console.log(req.body, req.body.name, req.body.desc);
       const locationList = await prisma.spotList.create({
         data: {
           userId: session.user.id,

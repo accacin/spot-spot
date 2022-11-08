@@ -1,7 +1,9 @@
 import Head from "next/head";
-import type { NextPage } from "next";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
+import type { GetServerSideProps, NextPage } from "next";
 
-const Lists: NextPage = () => {
+const Lists: NextPage = ({ data }: any) => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -88,9 +90,41 @@ const Lists: NextPage = () => {
             </button>
           </form>
         </section>
+        <section>
+          <h2>Existing Lists</h2>
+          <ul>
+            {data.map((list: any) => (
+              <li key={list.id}>{list.name}</li>
+            ))}
+          </ul>
+        </section>
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  /*
+    TODO: This needs to be called often
+    Is there a better way to do it?
+  */
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  const res = await fetch("http://localhost:3000/api/lists");
+  const data = await res.json();
+
+  return { props: { data } };
 };
 
 export default Lists;
