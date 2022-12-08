@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
+
 const CreateList = () => {
+    const router = useRouter();
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const dataObject = Object.fromEntries(formData);
 
-        await fetch("/api/lists/create", {
+        const res = await fetch("/api/lists/create", {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -12,8 +15,15 @@ const CreateList = () => {
             body: JSON.stringify(dataObject),
         });
 
-        event.target.reset();
+        if (res.status < 300) {
+            refreshData();
+            event.target.reset();
+        }
     };
+
+    const refreshData = () => {
+        router.replace(router.asPath);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
