@@ -22,8 +22,8 @@ const Lists: NextPage = ({ data }: any) => {
                 <section className="flex w-full flex-col mx-auto px-4 pb-4 md:px-6 lg:px-8 ">
                     <CreateList />
                 </section>
-                <section>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-x-12 lg:gap-y-12">
+                <section className="px-4 lg:px-8">
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-6 xl:grid-cols-5">
                         {data.map((list: any) => (
                             <ListCard
                                 key={list.name}
