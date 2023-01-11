@@ -3,8 +3,9 @@ import type { NextAuthOptions } from 'next-auth'
 import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import { db } from '../../util/db.server.ts';
 
-const prisma = new PrismaClient();
+const prisma = db;
 
 const { DISCORD_CLIENT_ID = "", DISCORD_CLIENT_SECRET = "" } = process.env;
 
