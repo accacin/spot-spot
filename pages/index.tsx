@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Head from "next/head";
-import type { NextPage } from "next";
+import Link from 'next/link';
+import Head from 'next/head';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
             Plot Locations with Friends
           </h1>
           <p className="text-gray-700 text-2xl w-2/3 text-center mb-10">
-            Found an interesting location when discovering a new city?{" "}
+            Found an interesting location when discovering a new city?{' '}
           </p>
           {/* This could be a component */}
           <Link href="/lists">

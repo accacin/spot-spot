@@ -1,7 +1,7 @@
-import "../styles/globals.css";
-import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
-import { Page } from "../components/layout";
+import '../styles/globals.css';
+import { SessionProvider } from 'next-auth/react';
+import type { AppProps } from 'next/app';
+import { Page } from '../components/layout';
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"

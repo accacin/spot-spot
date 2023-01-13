@@ -1,19 +1,19 @@
-import NextAuth from 'next-auth'
-import type { NextAuthOptions } from 'next-auth'
-import DiscordProvider from "next-auth/providers/discord";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-import { db } from '../../util/db.server.ts';
+import NextAuth from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
+import DiscordProvider from 'next-auth/providers/discord';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
+import { db } from '../../util/db.server';
 
 const prisma = db;
 
-const { DISCORD_CLIENT_ID = "", DISCORD_CLIENT_SECRET = "" } = process.env;
+const { DISCORD_CLIENT_ID = '', DISCORD_CLIENT_SECRET = '' } = process.env;
 
-if (DISCORD_CLIENT_SECRET === "" || DISCORD_CLIENT_ID === "") {
-  throw Error("Missing Discord credentials");
+if (DISCORD_CLIENT_SECRET === '' || DISCORD_CLIENT_ID === '') {
+  throw Error('Missing Discord credentials');
 }
 
-export const authOptions: NextAuthOptions  = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     DiscordProvider({
@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions  = {
   callbacks: {
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
@@ -33,8 +33,8 @@ export const authOptions: NextAuthOptions  = {
       session.user.id = user.id;
 
       return session;
-    }
+    },
   },
-}
+};
 
 export default NextAuth(authOptions);

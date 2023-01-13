@@ -1,12 +1,12 @@
-import Script from "next/script";
-import Head from "next/head";
-import dynamic from "next/dynamic";
+import Script from 'next/script';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
 
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
 const CreateMap: NextPage = () => {
-  const MapWithNoSSR = dynamic(() => import("../../components/map/Map"), {
-    ssr: false
+  const MapWithNoSSR = dynamic(() => import('../../components/map/Map'), {
+    ssr: false,
   });
 
   return (

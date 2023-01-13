@@ -1,9 +1,9 @@
-import { Fragment, forwardRef, HTMLProps } from "react";
-import { signOut } from "next-auth/react";
-import { Menu, Transition } from "@headlessui/react";
-import Link, { LinkProps } from "next/link";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { ProfilePicture } from "../../common";
+import { Fragment, forwardRef, HTMLProps } from 'react';
+import { signOut } from 'next-auth/react';
+import { Menu, Transition } from '@headlessui/react';
+import Link, { LinkProps } from 'next/link';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { ProfilePicture } from '../../common';
 
 const onClickHandler = (e: Event) => {
   e.preventDefault();
@@ -24,7 +24,7 @@ const MyLink = forwardRef<
   );
 });
 
-MyLink.displayName = "MyLink";
+MyLink.displayName = 'MyLink';
 
 interface PropTypes {
   name: string;
@@ -59,10 +59,10 @@ const Dropdown = ({ name, image }: PropTypes) => {
               <Menu.Item>
                 {({ active }) => (
                   <MyLink
-                    href={"/api/auth/signout"}
+                    href={'/api/auth/signout'}
                     onClick={(e) => onClickHandler(e)}
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     Logout

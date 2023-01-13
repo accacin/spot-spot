@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+import Image from 'next/future/image';
 interface Props {
   url?: string;
 }
