@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import type { NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 import { db } from '../../util/db.server';
 
 const prisma = db;
@@ -15,6 +14,7 @@ if (DISCORD_CLIENT_SECRET === '' || DISCORD_CLIENT_ID === '') {
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     DiscordProvider({
       clientId: DISCORD_CLIENT_ID,
@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
       return baseUrl;
     },
     async session({ session, user }) {
-      session.user.id = user.id;
+      session.user.userId = user.id;
 
       return session;
     },

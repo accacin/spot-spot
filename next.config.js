@@ -9,6 +9,11 @@ const nextConfig = {
         hostname: 'cdn.discordapp.com',
         pathname: '/avatars/*/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com',
+        pathname: '/embed/avatars/**',
+      },
     ],
   },
   webpack(config) {
