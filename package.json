@@ -18,12 +18,14 @@
     "leaflet": "^1.9.2",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet-geosearch": "^3.7.0",
-    "next": "12.3.1",
+    "next": "^13.1.2",
     "next-auth": "^4.16.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next-superjson-plugin": "^0.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-leaflet": "^4.1.0",
-    "react-query": "^3.39.2"
+    "react-query": "^3.39.2",
+    "superjson": "^1.12.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.3.1",
@@ -36,7 +38,7 @@
     "autoprefixer": "^10.4.12",
     "eslint": "^8.23.1",
     "eslint_d": "^12.2.0",
-    "eslint-config-next": "12.3.1",
+    "eslint-config-next": "^13.1.2",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-prettier": "^4.2.1",

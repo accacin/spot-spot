@@ -1,9 +1,9 @@
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { db } from '../../util/db.server';
 
-const prisma = new PrismaClient();
+const prisma = db;
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,7 @@ export default async function handler(
     try {
       const locationList = await prisma.spotList.create({
         data: {
-          userId: session.user.id,
+          userId: session.user.userId,
           name: req.body.name,
           description: req.body.desc,
           public: false,

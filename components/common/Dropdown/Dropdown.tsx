@@ -10,22 +10,6 @@ const onClickHandler = (e: Event) => {
   signOut();
 };
 
-const MyLink = forwardRef<
-  HTMLAnchorElement,
-  LinkProps & HTMLProps<HTMLAnchorElement>
->((props, ref) => {
-  let { href, children, ...rest } = props;
-  return (
-    <Link href={href}>
-      <a ref={ref} {...rest}>
-        {children}
-      </a>
-    </Link>
-  );
-});
-
-MyLink.displayName = 'MyLink';
-
 interface PropTypes {
   name: string;
   image: string;
@@ -58,7 +42,7 @@ const Dropdown = ({ name, image }: PropTypes) => {
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <MyLink
+                  <Link
                     href={'/api/auth/signout'}
                     onClick={(e) => onClickHandler(e)}
                     className={`${
@@ -66,7 +50,7 @@ const Dropdown = ({ name, image }: PropTypes) => {
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     Logout
-                  </MyLink>
+                  </Link>
                 )}
               </Menu.Item>
             </div>

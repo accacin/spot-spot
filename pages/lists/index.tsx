@@ -2,10 +2,11 @@ import Head from 'next/head';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import type { GetServerSideProps, NextPage } from 'next';
+import { db } from '../util/db.server';
 
 import { ListCard, CreateList, Heading } from '../../components/common';
 
-const Lists: NextPage = ({ data }: any) => {
+const Lists: NextPage = ({ lists }: any) => {
     return (
         <>
             <Head>
@@ -27,7 +28,7 @@ const Lists: NextPage = ({ data }: any) => {
                 <section>
                     <div className="layout">
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5">
-                            {data.map((list: any) => (
+                            {lists.map((list: any) => (
                                 <ListCard
                                     key={list.name}
                                     title={list.name}
@@ -59,11 +60,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             },
         };
     }
+    const lists = await db.spotList.findMany({
+        where: {
+            userId: session?.user.userId,
+        },
+    });
 
-    const res = await fetch('http://localhost:3000/api/lists');
-    const data = await res.json();
-
-    return { props: { data } };
+    return { props: { lists } };
 };
 
 export default Lists;
