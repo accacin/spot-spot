@@ -2,9 +2,7 @@ import NextAuth from 'next-auth';
 import type { NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { db } from '../../util/db.server';
-
-const prisma = db;
+import { prisma } from '../../../utils/db';
 
 const { DISCORD_CLIENT_ID = '', DISCORD_CLIENT_SECRET = '' } = process.env;
 

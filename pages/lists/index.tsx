@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 import type { GetServerSideProps, NextPage } from 'next';
-import { db } from '../util/db.server';
+import { prisma } from '../../utils/db';
 
 import { ListCard, CreateList, Heading } from '../../components/common';
 
@@ -44,8 +44,6 @@ const Lists: NextPage = ({ lists }: any) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    // FIXME: This needs to be called often,
-    // think of a better way to do this.
     const session = await unstable_getServerSession(
         context.req,
         context.res,
@@ -60,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             },
         };
     }
-    const lists = await db.spotList.findMany({
+    const lists = await prisma.spotList.findMany({
         where: {
             userId: session?.user.userId,
         },
