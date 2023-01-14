@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Heading from '../../Heading/Heading';
 
 const CreateList = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const CreateList = () => {
 
   return (
     <div className="p-4 border rounded-lg border-gray-200 shadow-md">
-      <h2>Add a new list</h2>
+      <Heading headingLevel="h3" className="pb-4">Create a new List</Heading>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
