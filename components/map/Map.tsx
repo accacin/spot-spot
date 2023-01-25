@@ -1,9 +1,31 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+    MapContainer,
+    TileLayer,
+    Marker,
+    Popup,
+    useMapEvents,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet-defaulticon-compatibility';
 
-const Map = () => {
+const LocationMarker = ({ location, setLocation }: any) => {
+    useMapEvents({
+        click(e) {
+            setLocation(e.latlng);
+        },
+    });
+
+    if (location == null) return null;
+
+    return (
+        <>
+            <Marker position={location}></Marker>
+        </>
+    );
+};
+
+const Map = ({ location, setLocation }: any) => {
     return (
         <MapContainer
             center={[40.8054, -74.0241]}
@@ -15,9 +37,7 @@ const Map = () => {
                 url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmV2aXZlcjQwNDQiLCJhIjoiY2w5N2V3cDVyMnRuZTN2cDJhZ2FncG5qOCJ9.ogq49vcP1FX67xMVa44L-w`}
                 attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
             />
-            <Marker position={[40.8054, -74.0241]} draggable={true}>
-                <Popup>Hey ! I live here</Popup>
-            </Marker>
+            <LocationMarker location={location} setLocation={setLocation} />
         </MapContainer>
     );
 };
