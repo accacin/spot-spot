@@ -4,9 +4,16 @@ import { unstable_getServerSession } from 'next-auth/next';
 import type { GetServerSideProps, NextPage } from 'next';
 import { prisma } from '../../utils/db';
 
-import { ListCard, CreateList, Heading } from '../../components/common';
+import { Heading } from '../../components/common';
 
-const Lists: NextPage = ({ lists }: any) => {
+interface List {
+    name: string;
+    description: string;
+}
+
+const SingleList: NextPage<{ list: List }> = ({
+    list: { name, description },
+}) => {
     return (
         <>
             <Head>
@@ -17,26 +24,12 @@ const Lists: NextPage = ({ lists }: any) => {
             <div className="container mx-auto">
                 <section className="flex w-full py-8">
                     <div className="layout">
-                        <Heading headingLevel="h1">Location Lists</Heading>
+                        <Heading headingLevel="h1">{`${name} List`}</Heading>
                     </div>
                 </section>
                 <section className="flex w-full flex-col mx-auto pb-4">
                     <div className="layout">
-                        <CreateList />
-                    </div>
-                </section>
-                <section>
-                    <div className="layout">
-                        <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 xl:grid-cols-5">
-                            {lists.map((list: any) => (
-                                <ListCard
-                                    id={list.id}
-                                    key={list.id}
-                                    title={list.name}
-                                    description={list.description}
-                                />
-                            ))}
-                        </div>
+                        <p>{description}</p>
                     </div>
                 </section>
             </div>
@@ -45,13 +38,14 @@ const Lists: NextPage = ({ lists }: any) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { id } = context.query;
     const session = await unstable_getServerSession(
         context.req,
         context.res,
         authOptions
     );
 
-    if (!session) {
+    if (!session || !id || Array.isArray(id)) {
         return {
             redirect: {
                 destination: '/',
@@ -59,13 +53,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             },
         };
     }
-    const lists = await prisma.spotList.findMany({
+    const list = await prisma.spotList.findFirst({
         where: {
-            userId: session?.user.userId,
+            id: parseInt(id, 10),
         },
     });
 
-    return { props: { lists } };
+    return { props: { list } };
 };
 
-export default Lists;
+export default SingleList;
