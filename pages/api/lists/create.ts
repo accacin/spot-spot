@@ -1,9 +1,7 @@
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../util/db.server';
-
-const prisma = db;
+import { prisma } from '../../../utils/db';
 
 export default async function handler(
   req: NextApiRequest,
