@@ -1,25 +1,23 @@
-import Head from 'next/head';
+import { useState } from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import { unstable_getServerSession } from 'next-auth/next';
-import { authOptions } from '../api/auth/[...nextauth]';
+import Head from 'next/head';
 import { prisma } from '../../utils/db';
+import { authOptions } from '../api/auth/[...nextauth]';
 import { Heading } from '../../components/common';
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import AddLocation from '../../components/common/forms/AddLocation/AddLocation';
+import { NextMap } from '../../components/map/NextMap';
 
 interface List {
     name: string;
     description: string;
 }
 
-const MapWithNoSSR = dynamic(() => import('../../components/map/Map'), {
-    ssr: false,
-});
-
 const SingleList: NextPage<{ list: List }> = ({
     list: { name, description },
 }) => {
     const [currentLocation, setCurrentLocation] = useState(null);
+    console.log(currentLocation);
     return (
         <>
             <Head>
@@ -28,18 +26,19 @@ const SingleList: NextPage<{ list: List }> = ({
             </Head>
             <div className="grid grid-cols-5 gap-0 w-full">
                 <div className="col-span-4">
-                    <MapWithNoSSR
+                    <NextMap
                         location={currentLocation}
                         setLocation={setCurrentLocation}
                     />
                 </div>
                 <div className="col-span-1">
                     <section className="p-4">
-                        <div className="layout pb-2">
+                        <div className="pb-2">
                             <Heading headingLevel="h3">{`${name} List`}</Heading>
                         </div>
-                        <div className="layout">
-                            <p>{description}</p>
+                        <p>{description}</p>
+                        <div className="py-6">
+                            {currentLocation && <AddLocation coords={currentLocation} />}
                         </div>
                     </section>
                 </div>
