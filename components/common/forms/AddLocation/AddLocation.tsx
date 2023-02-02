@@ -10,8 +10,9 @@ const AddLocation = ({ coords }: Props) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const dataObject = Object.fromEntries(formData);
+        const { id } = router.query;
 
-        const res = await fetch('/api/locations/create', {
+        const res = await fetch(`/api/lists/${id}/location/create`, {
             headers: {
                 'Content-Type': 'application/json',
             },

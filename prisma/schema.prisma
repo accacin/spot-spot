@@ -61,34 +61,32 @@ model VerificationToken {
 // SpotSpot tables
 
 model SpotList {
-  id                Int                @id @default(autoincrement())
-  userId            String
-  name              String?
-  description       String?
-  public            Boolean
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  spotListLocations SpotListLocation[]
-  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id               Int                @id @default(autoincrement())
+  userId           String
+  name             String?
+  description      String?
+  public           Boolean
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  User             User               @relation(fields: [userId], references: [id])
+  SpotListLocation SpotListLocation[]
 }
 
 model SpotListLocation {
-  listId     Int
-  locationId Int
   list       SpotList     @relation(fields: [listId], references: [id])
+  listId     Int
   location   SpotLocation @relation(fields: [locationId], references: [id])
+  locationId Int
 
-  @@unique([listId, locationId])
+  @@id([listId, locationId])
 }
 
 model SpotLocation {
-  id                Int                                  @id @default(autoincrement())
-  name              String?
-  description       String?
-  coords            Unsupported("geometry(Point, 4326)")
-  createdAt         DateTime                             @default(now())
-  updatedAt         DateTime                             @updatedAt
-  spotListLocations SpotListLocation[]
-
-  @@index([coords], name: "location_idx", type: Gist)
+  id               Int                                  @id @default(autoincrement())
+  name             String?
+  description      String?
+  coords           Unsupported("geometry(Point, 4326)") @unique
+  createdAt        DateTime                             @default(now())
+  updatedAt        DateTime                             @updatedAt
+  SpotListLocation SpotListLocation[]
 }
